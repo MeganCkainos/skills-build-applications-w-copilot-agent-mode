@@ -1,7 +1,17 @@
 import express from 'express'
 import { connectDatabase } from './config/database.js'
-import { apiBaseUrl, frontendOrigin, port } from './config/env.js'
 import apiRouter from './routes/index.js'
+
+const codespaceName = process.env.CODESPACE_NAME
+const port = Number(process.env.PORT ?? 8000)
+
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : `http://localhost:${port}`
+
+const frontendOrigin =
+  process.env.FRONTEND_ORIGIN ??
+  (codespaceName ? `https://${codespaceName}-5173.app.github.dev` : 'http://localhost:5173')
 
 const app = express()
 
