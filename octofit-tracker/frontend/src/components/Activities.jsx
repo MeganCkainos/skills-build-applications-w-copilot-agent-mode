@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react'
-import { API_BASE_URL, toArray } from '../config/api.js'
+import { toArray } from '../config/api.js'
+
+// Requires VITE_CODESPACE_NAME to be defined (for example in .env.local); falls
+// back to localhost to avoid a broken https://undefined-8000... URL.
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const ACTIVITIES_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/activities/`
+  : 'http://localhost:8000/api/activities/'
 
 function Activities() {
   const [activities, setActivities] = useState([])
@@ -9,7 +16,7 @@ function Activities() {
   useEffect(() => {
     let cancelled = false
 
-    fetch(`${API_BASE_URL}/activities/`)
+    fetch(ACTIVITIES_API_URL)
       .then((response) => {
         if (!response.ok) throw new Error(`Request failed with status ${response.status}`)
         return response.json()
