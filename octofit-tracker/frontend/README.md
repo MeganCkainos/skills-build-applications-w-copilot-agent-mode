@@ -1,3 +1,17 @@
+# Octofit Tracker Frontend
+
+React 19 + Vite presentation tier for Octofit Tracker.
+
+## Environment variables
+
+The app calls the backend API at
+`https://${VITE_CODESPACE_NAME}-8000.app.github.dev/api/[component]/`, so
+**`VITE_CODESPACE_NAME` must be defined** (for example in `.env.local`, which
+is gitignored) before running `npm run dev`. See `.env.local.example` for the
+expected variable name. If it is unset, the app falls back to
+`http://localhost:8000/api` instead of producing a broken
+`https://undefined-8000...` URL.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
